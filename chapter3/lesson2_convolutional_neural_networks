@@ -1,0 +1,34 @@
+CNN
+
+MNIST database:
+handwriting numbers dateset
+preprocessing: white = 225, black = 0 
+all numbers divided by 225 and one-hot label encoding applied to labels number
+MLP uses vectors as input. so vectors are flattened to vectors.
+CNN uses matrixes as input.
+
+Relu function:
+0 for negatives number itself for positives
+
+Although we have train and test set, why do we need validation set?
+
+
+CNNs for Image Classification:
+filters: generally increase because we want to increase the depth 
+kernel_size = generally squares min 2,2 and max 5,5
+strides = generally set to 1 (default in keras)
+padding =  same is believed to return better results
+
+Groundbreaking CNN Architectures:
+AlexNet: Uses RELU function to avoid overfitting in 2012 by Toronto University. Uses large 11X11 windows.
+VGG: 3X3 convolutions, 2X2 pooling layers, finished with 3 fully connected layers. Two versions: VGG16, VGG19 (16, 19 are number of total layers.) Oxford University.
+ResNet: Microsoft. 2015. Similar to VGG but it doesn't repeat the same structure again and again. As we add new layers performance increases up to a point but then the performance declines. This is partially related to vanishing gradient problem. 
+
+
+Visualizing CNNs:
+Deep Dream: Google framework.
+
+Transfer Learning:
+We can still use a pre-trained neural network on a new dataset which is different from the train set. Because, the first layers of a neural network generally stores more generic information like edges, colors, etc. On the other hand, the last layers generally stores more specific filters e.g. bird, dog, wheel, etc. If the testset is not similar to trainset, we can remove the last layer from the model and add a new layer and train only the last layer we added recently.
+If the new dataset is small, we freeze all the weights from the pre-trained model to prevent overfitting. Otherwise we don't freeze.
+If the new dataset is not similar to the pre-trained model, then we use only the lower features of the model.

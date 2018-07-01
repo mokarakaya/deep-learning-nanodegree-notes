@@ -1,0 +1,31 @@
+dense layers: fully connected, every node is connected to each node in the previous layer
+convolutional layers: locally connected, a node is connected to only some node in the previous layers
+
+stride: how many units does the window move for each slide
+padding: if stride is high the window may not fit on the edges. to be sure that the window fits at each slide, we may add padding to the image. (Alternatively, we may also just delete the results of the slide which doesn't fit the window)
+
+dimensionality:
+K = number of filters in the convolutional layer (filters)
+F = height and width of the convolutional filters (kernel_size)
+D_in = the depth of the previous layer
+K = number of biases
+
+number of parameters in a convolutional layer = K * F * F * D_in + K
+
+S = the stride of the convolution
+H_in = the height of the previous layer
+W_in = the width of the previous layer
+
+
+if padding == 'same'
+height = ceil(float(H_in) / float(S))
+width = ceil(float(W_in) / float(S))
+
+if padding == 'valid'
+height = ceil(float(H_in - F + 1) / float(S))
+width = ceil(float(W_in -F + 1) / float(S))
+
+pooling layers: often resides between convolutional layers and reduces the dimensionality since high dimensionality leads to overfitting
+pooling layer examples:
+max pooling layer = gets the max value of each stride
+global average pooling layer = gets the average of each feature map

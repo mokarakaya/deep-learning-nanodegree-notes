@@ -1,0 +1,22 @@
+tf.Variable(): modifible
+tf.placeholder(), tf.constant(): not modifible
+tf.global_variables_initializer(): initialize all global varibles
+tf.truncated_normal(): initialize random normal distribution
+
+softmax: 
+converts all inputs into 0 and 1
+and the sum is 1
+
+minibatching: training on subsets of the dataset instead of all the data at one time
+disadvantage: can't calculate the loss efficiently across all dataset simultaneously
+advantage: doesn't need to store entire dataset in memory
+
+epochs: an epoch is a single forward and backward pass of the whole dataset. Lowering the learning rate'd require more epochs, but could ultimately achieve better accuracy.
+
+multilayer neural networks: adding a hidden layer to a network allows it model more complex functions. Also, using a non-linear activation function on the hidden layer lets it model non-linear functions.
+
+TensorFlow ReLUs: tf.nn.relu: acts like an on/off switch. non linearity allows the network to solve more complex problems.
+
+Finetuning: If we don't set the names of the variables (weight, bias) tf may save the names differently and while restoring the model, we may get varibles in incorrect order. In order to solve this, we need to set variables with names.
+
+Dropout: tf.nn.dropout() removes somes neurons with their connections from the model temporarily to prevent the model from overfitting.
