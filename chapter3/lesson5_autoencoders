@@ -1,0 +1,15 @@
+Autoencoders:
+Encoders and decoders are constructed by neural network to compress and decompress the data.
+Autoencoders are also used for denoising.
+
+A Simple Autoencoder:
+Neural network is created as Input:748 length vectors, Hidden: N, Output: 748
+Hidden layer vector are much smaller and has the compressed data.
+
+Convolutional Autoencoders:
+Encoder is several layers of convolution and max pooling layers respectively.
+Decoder is sevetal layers of resize and convolutional layers respectively.
+Resize creates a bigger picture and fills the gaps. We can use several methods to fill the gaps. For instance;
+tf.image.resize_nearest_neighbor(convd, (14, 14)) -> creates a 14,14 data and predicts the gap by using nearest neigbors.
+
+In the last step of both models we use optimizer e.g. AdamOptimizer	

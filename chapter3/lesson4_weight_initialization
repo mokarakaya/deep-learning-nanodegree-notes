@@ -1,0 +1,23 @@
+Weight initialization with ones and zeros:
+The model will poorly work. Let's say we have 10 classes, accuracy will be 10% which equals to random guessing.
+
+Uniform distribution (equally random numbers): 
+The model accurately learn from the data (68% in example)
+General rule is to set numbers close to zero. But it should not be too small. 
+Good practice is to start weights between [-y, y] where y = 1 / squareroot(n) where n is the number of inputs to a given neuron.
+
+In the example if we initialize weights with random numbers between (0,1) accuracy is 73%
+In the example if we initialize weights with random numbers between (-1,1) accuracy is 89%
+
+
+Too small:
+[-0.1, 0.1] is better that [-1, 1] and [-0.01, 0.01] because it fits to the general rule above.
+So, we should find the range by using general rule.
+
+Normal distibution:
+Normal distibution between [-0.1, 0.1] is better than uniform distribution.
+
+Truncated normal distribution:
+If we remove numbers which has bigger standard deviation than a given number, it will return the best performance. (Especially if we need to initialize lots of weights and have quite some numbers with high SD.)
+
+
