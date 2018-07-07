@@ -1,0 +1,8 @@
+Transfer Learning with 	VGGNet:
+We get pretrained VGG Network for images. This network has several convolutional layers and pooling layers. At the end of the network, we have fully connected layers. We remove fully connected layers and add our own fully connected layers, Then, we  run new flowers dataset on this pre-trained network. Because, the fully connected layers keep specilized features for the images dataset. 
+The final layer of the network is softmax. We always keep as the final layer.
+
+Classifier:
+We add two fully connected layers. The second one doesn't have activation function. If we don't have activation function, the layer returns linear result. Then we have softmax cross entropy with logits. Then, we use Adam Optimizer.
+
+

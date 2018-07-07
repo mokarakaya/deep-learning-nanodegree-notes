@@ -16,7 +16,6 @@ S = the stride of the convolution
 H_in = the height of the previous layer
 W_in = the width of the previous layer
 
-
 if padding == 'same'
 height = ceil(float(H_in) / float(S))
 width = ceil(float(W_in) / float(S))

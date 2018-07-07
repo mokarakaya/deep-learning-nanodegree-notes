@@ -1,0 +1,19 @@
+Rnn Introduction:
+Many dependencies involve temporal dependencies or dependencies over time. Current output doesn't only depend on current input but also previous inputs. Is the cat static, walking or running? 
+
+RNN History:
+Feedforward Neural Networks weren't able to run successfully on temporal dependencies and they also suffer from vanishing gradient problem. RNN's are sufficient on temporal dependencies.
+
+RNN Applications:
+Speech recognition
+Time series predictions (traffic patterns, movie selection, stock movement and market conditions)
+NLP (quetions answering, chatbots)
+Gusture Recognition
+
+The Feedforward Process:
+Every input node feeds each hidden layer with a weight. After xW's are summed, we apply an activation function which may be a hyperbolic tangent, a sigmoid or a relu function.
+
+Backpropagation:
+Backpropagation is about calculating the weights backwards by using gradient descent with the chain rule.
+Solutions for the overfitting problem = One way is to stop training process early by creating the validation set from the training set and calculate the error. The downside is that when we extract validation set from training set, the training set gets smaller. Another method is regularization. 
+The chain rule = To update the weights, we need the network error. To find the network error, we need the network output, and to find the network output we need the value of the hidden layer, vector h. 
