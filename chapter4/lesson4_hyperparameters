@@ -1,0 +1,12 @@
+Introduction:
+Generally speaking there are two kinds of hyperparameters, optimizer hyperparameters, model hyperparameters
+
+Optimizer hyperparameters -> more related to optimization and learning process e.g. learning rate, minibatch size, epocs.
+Model hyperparameters -> more related to model e.g. number of layers, hidden layer etc.
+
+Learning rate:
+Assumed to be most important hyperparameter.
+
+Learning Rate Decay -> We decrease the learning rate linearly (half every 5 epocs) or exponentially (multiply by 0.1 every 8 epocs).
+
+Adaptive learning -> The algorithms may increase or decrease the learning rate. There are some algorithms to have it in tensorflow.

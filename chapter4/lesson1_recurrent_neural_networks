@@ -15,5 +15,37 @@ Every input node feeds each hidden layer with a weight. After xW's are summed, w
 
 Backpropagation:
 Backpropagation is about calculating the weights backwards by using gradient descent with the chain rule.
+
 Solutions for the overfitting problem = One way is to stop training process early by creating the validation set from the training set and calculate the error. The downside is that when we extract validation set from training set, the training set gets smaller. Another method is regularization. 
-The chain rule = To update the weights, we need the network error. To find the network error, we need the network output, and to find the network output we need the value of the hidden layer, vector h. 
+
+The chain rule = To update the weights, we need the network error. To find the network error, we need the network output, and to find the network output we need the value of the hidden layer, vector h.
+If x -> A -> B where A = f(x) and B = g(f(x));
+partital derivative of B with respect to x is partial derivative of B with respect to A times partial derivative of A with respect to x
+
+if we have a network with two hidden layers[h1, h2][h3, h4] and x=input, y=output.
+Update rule for W1 (weight from x to h1) will be; partial derivative of y with respect to W1;
+der_Y / der_W1 = (der_Y/ der_H3 * der_H3 / der_H1 * der_H1 / der_W1) + (der_Y / der_H4 * der_H4 / der_H1 * der_H1 / der_W1)
+der = derivative
+
+RNN:
+The main two differences between FFNNs and RNNs are that RNNs uses;
+1- sequences as inputs in training phase
+2- memory elements (output of hidden neurons which will serve as additional input to the network.)
+
+In RNNs, the hidden layers also depend on the previous state of themselves. The output calculation is same as FFNN. 
+So the equation for a hidden layer is; s_t = act *  (x_t * W_t + s_t-1 * W_s)
+act = activation function
+(In RNNs, we call hidden layers as state layers (s) or memory. )
+
+Backpropagation Through Time (BPTT):
+BPTT is slightly different from BP and it depends on all previous times.
+If we want to calculate the partial derivative of E3 at time t=3 with respect to Ws, we need to calculate the partial derivatives of S3, S2 and S1. Then we sum all S (S3 + S2 + S1)
+E = error
+
+BPTT works fine until t-8 or t-10. But then we may get vanishing gradient problem.
+In order to solve this problem, we use long short-term memory cells (LSTM). 
+We also may have the exploiding gradient problem where the gradient grows uncontrollably. We use gradient clipping to solve it. We penalize the gradients which are larger than a threshold.
+
+Long short-term memory cells (LSTM): By using LSTMs, we can consider over 1K timesteps. The main idea is that LSTMs can decide which information to forget, store and when to use.
+
+

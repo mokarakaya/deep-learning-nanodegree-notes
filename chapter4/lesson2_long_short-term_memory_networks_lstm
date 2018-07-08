@@ -1,0 +1,40 @@
+RNN vs LSTM:
+RNNs are not good at storing long term memory and causes vanishing gradient problem. LSTM solves this problem.
+LSTMs gets input, long term memory and short term memory as input and returns output, long term memory and short term memory as output.
+So, after the operation, we don't only return the output but we may also update short term memory and long term memory.
+
+Basics of LSTM:
+We have 4 gates; forget, learn, remember, use.
+long term -> forget -> remember -> long term
+short term -> learn -> use -> short term	
+
+forget(ltm)
+remember(ltm, stm, input)
+learn(stm, input)
+use(stm, ltm, input)
+
+The learn gate:
+N_t = tanh(W_n[STM_t-1, E_t] + b_n)
+where N is learn gate, E is event and b is bias.
+
+and then we do -> N_t * i_t where i is ignore vector which we use to ignore irrelavant information.
+i_t = sigmoid(W_i[STM_t-1, E_t] + b_i)
+
+The forget gate: 
+LTM_t-1 * f_t where f is the forget factor.
+f_t = sigmoid(W_f[STM_t-1, E_t] + b_f)
+
+The remember gate:
+We add forget gate to learn gate and update ltm as;
+LTM_t = LTM_t-1 * f_t + N_t * i_t
+
+The use gate:
+We calculate U_t and V_t  and we update the short term memory with the output.
+To calculate U_t, we apply tanh to the output of the forget gate.
+V_t is calculated as follows;
+STM_t = U_t * V_t 
+U_t = tanh(W_u * LTM_t-1 * f_t + b_u)
+V_t = sigmoid(W_v[STM_t-1, E_t] + b_v) 
+
+Other architectures:
+Other architectures are also possible as long as they work e.g Gated Recurrent Unit (GRU)
