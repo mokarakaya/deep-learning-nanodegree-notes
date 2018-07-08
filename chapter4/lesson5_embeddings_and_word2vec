@@ -1,0 +1,11 @@
+Embeddings Intro:
+This is a deep neural network method for representing data with a huge number of classes more efficiently.
+Word embeddings in particular are interesting because the networks are able to learn semantic relationships between words. For example, the embeddings will know that the male equivalent of a queen is a king.
+
+Implementing Word2Vec:
+If we work on text, we typically apply one-hot encoding to the words. So, we need to do matmul a giant vector to set hidden layers.
+We solve it with embeddings by creating a lookup table for the words. The dimensions of the lookup table is number of words * embedding dimension (which we set). Words from similar contexts will have similar vectors.
+Two possible architectures to implement is CBOW (Continuous bag-of-words) and skip-gram. Skip-gram performs better.
+We first remove words which show up so often e.g. the, of, a etc. because they generally don't a context.
+
+As result, we can group words which belong to similar contextes.

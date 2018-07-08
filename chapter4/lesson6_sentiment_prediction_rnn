@@ -1,0 +1,5 @@
+Sentiment RNN:
+input -> embed -> lstm -> sigmoid -> output (positive | negative)
+
+Data processing:
+We set a seq_len (e.g. 200) to each review. So, we use only 200 words of reviews. If a review is less than seq_len, we pad the review vector with zeros.

@@ -10,3 +10,25 @@ Assumed to be most important hyperparameter.
 Learning Rate Decay -> We decrease the learning rate linearly (half every 5 epocs) or exponentially (multiply by 0.1 every 8 epocs).
 
 Adaptive learning -> The algorithms may increase or decrease the learning rate. There are some algorithms to have it in tensorflow.
+
+Minibatch Size:
+Stochastic (online) training processes one input and then calculates the error and updates the weights.
+Batch training processes all inputs and calculates the error and updates the weights.
+Minibatch size = 1 -> stachastic
+Minibatch size = size of input -> batch training
+If minibatch size is too small, processing may be too small.
+If minibatch size is too large, it may be computationally taxing and could result in worse accuracy.
+32, 64, 128, 256 are good values to start with.
+
+Number of training iterations (Epochs):
+We should check validation error to decide on a good number of epochs.
+Alternatively, we can use early stopping. It stops the iteration when the error stops decreasing.
+
+Number of hidden units / Layers:
+If we have too many hidden units, the model may overfit (training accuracy is much better than validation accuracy.)
+Other than that, more is better.
+3 layers generally is the best, more layers rarely performs better. The exception is CNN. For CNN, deeper is better.
+
+RNN Hyperparameters:
+Lstm vs gru -> it depends on the task.
+Embeddings -> around 500 is fine to start with.
