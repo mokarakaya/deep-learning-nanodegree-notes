@@ -1,0 +1,27 @@
+What can you do with GANs:
+GANs are generally applied (but not limited) to images. E.g. sketches to realistic images, images to cartoons etc.
+It's also used to simulate physics experiments such as Monte Carlo experiment.
+GANs are unsupervised learning algorithms.
+
+How GANs work:
+There are two networks (generator, discriminator).
+Generator starts with random noise and tries create real images.
+Discriminator gets half of the input from real images and half of the input from the output of generator.
+discriminator tries to find real images.
+generator tries to fake discriminator.
+So, generator learns to make realistic images in order to fake the generator.
+
+Games and Equilibria:
+Adversarial word in GANs means that two networks are in competition with each other.
+In rock, paper, scissors game, if the users uniformly random decides on their moves they will reach to equilibrium.
+Cost of the disriminator is the negative of the cost for generator.
+We generally run two optimization algorithm in GANs. 
+
+Practical tips and tricks for training GANs:
+We need to make sure that both generator and discriminator have at least one hidden layer.
+For the hidden layer, generally many activation algorithms work but Leaky Relu is assumed to be the best. 
+For output of the generator, we generally use hyperbolic tangent activation function.
+The output of the discriminator needs to be a probability, so, we generally use sigmoid function.
+Optimizor is generally Adam Optimizor.
+For big pictures, we use convolutions.
+  
