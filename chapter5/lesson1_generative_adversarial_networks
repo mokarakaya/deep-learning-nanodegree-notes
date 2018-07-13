@@ -22,6 +22,6 @@ We need to make sure that both generator and discriminator have at least one hid
 For the hidden layer, generally many activation algorithms work but Leaky Relu is assumed to be the best. 
 For output of the generator, we generally use hyperbolic tangent activation function.
 The output of the discriminator needs to be a probability, so, we generally use sigmoid function.
-Optimizor is generally Adam Optimizor.
+Optimizer is generally Adam Optimizer.
 For big pictures, we use convolutions.
   
