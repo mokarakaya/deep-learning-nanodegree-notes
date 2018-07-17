@@ -24,4 +24,15 @@ For output of the generator, we generally use hyperbolic tangent activation func
 The output of the discriminator needs to be a probability, so, we generally use sigmoid function.
 Optimizer is generally Adam Optimizer.
 For big pictures, we use convolutions.
-  
+ 
+Generator Network:
+z (random input ) -> Leaky relu -> tanh 
+Tensorflow doesn't have Leaky relu function, so we define it as f(x) = max(a*x, x) where a is a small number e.g. 0.01 
+tanh output is between -1 and 1 which means we'll need to rescale mnist dataset to -1,1 later in discriminator
+Since we'll run different networks simultaneously, we need to create variables with scopes. tf.variable_scope 
+
+Discriminator:
+Leaky relu -> sigmoid
+we feed leaky relu layer with mnist dataset (a real dataset).
+
+tf.trainable_variables -> returns all trainable variables in a list.
