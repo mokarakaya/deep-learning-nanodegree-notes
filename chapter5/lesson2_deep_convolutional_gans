@@ -1,0 +1,19 @@
+DCGAN Architecture:
+The difference is that we'll use deep convolutional layers to solve more complex problems.
+Transpose convolutional layer -> This is the opposite of convolutional layer. It goes from narrow and deep to wide and flat. The new layer size depends on the stride. If the stride is 2, the new layer height and width will be doubled.
+e.g we start with an image and turn it to 4 X 4 X 1024 and in the final layer it'll be 64 X 64 X 3 which is real size of the image (3 is for RGB)
+generally we use relu activation for each layer.
+We also generally use batch normalization for all layer except the last one.
+Batch normalization scales the layer inputs to have a mean of 0 and variance of 1. This helps the network to train faster and reduces the problems due to poor parameter  initialization.
+The discriminator is a convolutional network.
+
+DCGAN and the Generator:
+We start with adding a fully connected dense layer and add batch normalization + leaky relu.
+Then we add several (2) transpose convolutional layers with batch normalization + leaky relu.
+Finally we add another transpose convolutional layer and apply tanh. We use the output as logits.
+
+Discriminator:
+In this step, we'll decrease the height and weight but we'll increase the depth.
+In the first layer we apply convolutional layer with leaky relu. We don't have batch normalization in the first layer.
+For the next two layers, we have convolutional layers with batch normalization and leaky relu.
+Finally, we reshape the output of the last layer to a vector and then we pass the output to a fully connected dense layer which has only one unit. We use this as logits and pass logits thought a sigmoid function to get the output.
