@@ -1,0 +1,11 @@
+Semi-Supervised Classification with GANS:
+In previous examples our goal was to train generator. After we trained the model we only use the generator. So, generator has the first importance.
+In semi-supervised classification, we train the discriminator as the classifer. In this models, discriminator has the first importance.
+
+In this model, we create the classes and we add an extra class which is labeled as 'fake'.
+
+Costs are ->
+total_cost = cost_labeled + cost_unlabeled
+cost_labeled = cross_entropy(logits, labels)
+cost_unlabeled = cross_entropy(logits, real)
+p_real = sum(softmax(real_classes))
