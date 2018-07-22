@@ -1,0 +1,8 @@
+Applications:
+Numerous and diverse applications e.g alphago, self driving cars, other board games etc.
+
+The setting:
+The goal is to maximize reward.
+Exploration-exploitation dilemma -> The agent should find a balance between exploring (potential hypotheses for how to choose actions) and exploiting (limited knowledge about what is already known should work well.). So, should the agent settle for just one treat or should aim higher.
+The agent should also need to find a long term strategy to maximize reward.
+

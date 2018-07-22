@@ -1,0 +1,65 @@
+The Setting revisited:
+agent -> action -> environment
+environment -> observation/state -> agent
+environment -> reward -> agent
+The agent makes an action in the environment and his observation(state) changes, and he may receive an reward for his action.
+As the process goes on a sequence of states, actions, and rewards is created. e.g S_0, A_0, R_0,  S_1, A_1, R_1,  S_2, A_2, R_2 etc.
+
+Episodic vs. Continuing Tasks:
+Episodic -> The interaction ends at some time step T. e.g. car crashes, the game ends etc.
+Continuing -> Interaction continues without limit. e.g. buy and sell stocks algorithm.
+
+Quiz - Test Your Intuition:
+The reward is received at only at the end of the game. 
+
+The Reward Hypothesis:
+The Goal of the Agent -> Maximize expected cumulative reward.
+
+Goals and Rewards Part 1:
+What are the states if the agent is a walking robot -> The positions and velocities of the joints, measurement of the ground, contact sensor data. 
+
+Goals and Reward Part 2:
+If the agent is a walking robot -> 
+r = min(V_x, V_max) - 0.005 ((v_y)_2 + (v_z)_2 ) - 0.05 y_2 - 0.02 ||u||_2 + 0.02
+min(V_x, V_max) -> proportional to the robot's forward velocity.
+0.005 ((v_y)_2 + (v_z)_2 ) -> penalize deviation from forward direction.
+0.05 y_2 -> penalize deviation from center of track.
+0.02 ||u||_2 -> penalize torques (donme, burkulma)
+0.02 -> constant reward for not falling. (when the agent falls the process is terminated.)
+
+If the agent is playing a video game -> The reward is the score on the screen.
+If the agent is playing a backgammon -> The reward is delivered at the end of the game. win/lose.
+
+Cumulative Reward:
+R_1 +  ... + R_t + R_t+1 + R_t+2 + ...
+
+R_1 +  ... + R_t -> in the past (already decided)
+R_t+1 -> immediate reward after A_t
+R_t+2 + ... -> in the future
+
+The return at time step t is ->
+G_t = R_t+1 + R_t+2 + ... 
+At time step t, the agent picks A_t to maximize (expected) G_t
+
+Discounted Return:
+Let's say future is N step from now. It may not be a good idea to set N as a huge number. Because, it's not very easy to predict far future.
+A reward is at time N+k
+We can set higher weights to the reward in near future (higher weights to the smaller k values.)
+Rewards in the far future have discounted returns.
+So (discounted) return function is ->
+G_t = R_t+1 + (0.9) *  R_t+2 + (0.8) * R_t+3 + ...
+In order to calculate the discount, we define discount rate.
+discount rate (gamma γ)  is a number between 0 and 1. So, discounted return function is updated as follows; 
+G_t = R_t+1 + γ *  R_t+2 + γ_2 * R_t+3 + γ_3 * R_t+4 ...
+So, rewards that occur earlier in time are always multiplied by a larger number.
+
+MDP's Part 1:
+Defines a reinforcement learning problem as a Markov Decision Process (MDP).
+Agent -> A robot which collects empty soda cans. It also changes itself at a docking station.
+Action space -> A = search (for an empty cans), rechange, wait.
+State space -> S = high (a high amount of charge) , low  
+
+
+
+
+
