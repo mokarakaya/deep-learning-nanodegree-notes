@@ -59,6 +59,9 @@ Agent -> A robot which collects empty soda cans. It also changes itself at a doc
 Action space -> A = search (for an empty cans), rechange, wait.
 State space -> S = high (a high amount of charge) , low  
 
+Quiz - One-Step Dynamics Part2
+p(s′, r | s, a)
+p(high, 0 | low, recharge) -> probability when changing state from low to high by recharging and reciving 0 reward.
 
 
 

@@ -1,0 +1,9 @@
+Polices:
+Deterministic policy = π: S -> A (input is S, output is A, and π is the policy)
+Stochastic policy = π: S x A -> [0, 1]
+π(a | s) = P(A_t = a | S_t =s)
+Environment s and action a is the input and returns an action while the agent is in state s.
+
+Deterministic policy example -> π(low) = recharge or π(recharge | low) = 1 (since the probability is set to 1)
+Stochastic policy example -> π(recharge | low) = 0.5 (Whenever the battery is low, recharge it with 0.5 probability)
+
