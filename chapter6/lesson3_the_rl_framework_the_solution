@@ -7,3 +7,21 @@ Environment s and action a is the input and returns an action while the agent is
 Deterministic policy example -> π(low) = recharge or π(recharge | low) = 1 (since the probability is set to 1)
 Stochastic policy example -> π(recharge | low) = 0.5 (Whenever the battery is low, recharge it with 0.5 probability)
 
+State-Value Function:
+For each state (in a grid), state-value function yields the expected return, if the agent started in each state, and then followed the policy for all time steps.
+
+Bellman Equations:
+We can calculate the value of the each state by using the value of the next state recursively.
+So, the value of the state = the immediate reward + the discounted value of the state that follows.
+
+Optimality:
+a policy pi is better than policy pi only if all state values are larger or equal to the policy pi.
+there is at least one optimal policy which is denoted by pi star and its state-value function is denoted by v star.
+
+Action-value functions:
+State-value function -> Denoted by v. Single number. If the agent starts in that state, and then follows the for all time steps.
+Action-value functions -> Denoted by q. One number for each possible actions in a given state. So, if the agent can go 4 different directions from a given state then we have 4 action values. (except the terminal state. it's always 0)
+
+Optimal Policies:
+The agent interacts with the environment and it estimates the optimal action value function. Then the agent uses that value function to get the optimal policy. 
+If the agent has the optimal action-value function, it can quickly obtain an optimal policy.
