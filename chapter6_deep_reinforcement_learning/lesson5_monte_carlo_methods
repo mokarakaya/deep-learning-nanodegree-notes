@@ -36,4 +36,7 @@ We'll use Epsilon-Greedy Policy. We set a small value epsilon.
 With 1 - epsilon probability, we select the greedy action.
 With epsilon probability, we select a random action. Because we'd like to discover non-greedy posibilites as well.
 
+Summary:
+On-policy -> These methods interact with the environment by following same policy (in order to evaluate and improve)
+Off-policy -> These methods interact with the environment by following a different policy (in order to evaluate and improve)
 
