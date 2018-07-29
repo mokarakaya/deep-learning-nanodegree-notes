@@ -3,4 +3,24 @@ For this problem, we'll assume that the agent already knows everything about the
 
 An Iterative Method Part 1:
 In a very very small environment, we can calculate state-values by using equations. But in real world, this is not the reality.
-One way is to start with initial state (assume other states values are 0) and guess state values with iterations. 
+One way is to start with initial state (assume other states values are 0) and guess state values with iterations.
+
+Iterative Policy Evaluation:
+Computes the state value function corresponding to an arbitrary policy.
+
+Policy Improvement:
+Iterative policy evalution takes a policy and yields the value function.
+Then, we can get the same value function and use policy improvement to get a potentially new and improved policy.
+Then, we can get this new policy and plug it to do policy evaluation again until we converge to an optimal policy.
+Policy improvement has two steps;
+- Convert state value function to action value function.
+- Use action value function to obtain a better policy function. In order to find a better policy, we can get argmax of each action values or we can construct a stochastic policy that puts equal probability on maximizing actions.
+
+Truncated Policy Iteration:
+The difference between iterative policy iteration and truncated policy iteration is the stop criteria.
+Truncated policy evaluation sets a max iteration counter and stops when it's exceeded.
+Iterative policy evaluation sets a small number theta and stops when the difference between old and new policy is less than theta.
+
+Value Iteration:
+The main difference is that we stop policy evaluation after one sweep. 
+After policy evalution we check if delta is smaller than theta. If so, we return the result, otherwise we continue with policy improvement.
