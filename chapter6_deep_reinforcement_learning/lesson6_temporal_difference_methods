@@ -1,0 +1,4 @@
+Introduction:
+In this method, we don't need to wait for episode to end in order to evaluate and improve the policy.
+For instance, if the agent plays chess, it will be able to estimate probability to win after each action. 
+Similarly, a self driving car estimates if it's likely to crash and if necessary changes its strategy
