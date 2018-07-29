@@ -1,0 +1,39 @@
+Introduction:
+For this problem, the agent is not given full knowledge of how the environment operates, and instead, must learn from interaction.
+
+MC Prediction - State Values (V) :
+The general problem definition is same. The agent receives a state and reward and performs an action as a response to environment.
+So the sequence is S,A,R... and terminates with the final S.
+On-Policy Method -> Generate episodes from the policy pi, and use the edisodes to esmitate state value function v.
+An example setup may be as follows;
+S = {X, Y, Z} (Z is the final state)
+A = {up, down}
+policy = π(X) -> up, π(Y) -> down
+episode = X, up, -2, Y, down, 0, Y, down, 3, Z
+The value of a state is defined to be the expected return after that state is observed.
+So, the value of state Y is (0 + 3) / 1 (number of edisodes = 1) (first-visit MC method)
+Or, alternatively, we can get average of all Y states as; (((0 + 3)) + ((3))) / 2 (every-visit MC method)
+
+MC Prediction - Action Values (Q) :
+In this step we calculate each possible state action values.
+q_pi(X, up) = -2 + 0 + 3 (if there are more episodes we take the average. (similar to state value calculation))
+Similar to state value calculation, we can either choose to calculate the action values similar to first-visit or every-visit MC methods.
+We'll use only stochastic policies. So, every state, action pairs will have a probability. If a particular state action doesn't exist in any observed episodes, we'll assign a small value for it.
+
+MC Control - Incremental Mean: 
+Instead of improving the policy after several episodes, we'll improve it after each episode.
+So, we'll repeat following steps;
+Evaluation -> 
+- Generate an episode by using pi
+- Use the episode to update Q
+Improvement -> 
+- Use Q to improve pi
+
+A general formula for incremental mean -> m = m + ( 1/k (x_k - m) ) where x_k is the kth element in the array and m is the current mean.
+
+MC Control - Policy Improvement:
+We'll use Epsilon-Greedy Policy. We set a small value epsilon.
+With 1 - epsilon probability, we select the greedy action.
+With epsilon probability, we select a random action. Because we'd like to discover non-greedy posibilites as well.
+
+
