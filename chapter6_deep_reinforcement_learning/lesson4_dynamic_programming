@@ -1,0 +1,6 @@
+Introduction:
+For this problem, we'll assume that the agent already knows everything about the environment (the agent doesn't have to learn from interaction). So, the agent knows how the environment decides the next state and reward.
+
+An Iterative Method Part 1:
+In a very very small environment, we can calculate state-values by using equations. But in real world, this is not the reality.
+One way is to start with initial state (assume other states values are 0) and guess state values with iterations. 
