@@ -1,4 +1,42 @@
 Introduction:
-In this method, we don't need to wait for episode to end in order to evaluate and improve the policy.
-For instance, if the agent plays chess, it will be able to estimate probability to win after each action. 
-Similarly, a self driving car estimates if it's likely to crash and if necessary changes its strategy
+In this method, we don't need to wait for the episode to end in order to evaluate and improve the policy.
+For instance, if the agent plays chess, it will be able to estimate the probability to win after each action. 
+Similarly, a self-driving car estimates if it's likely to crash and if necessary changes its strategy
+
+TD Prediction TD(0):
+In Monte Carlo method update rule for State values was;
+V(S_t) = V(S_t) + alfa(G_t - V(S_t))
+In temporal difference method, we need to be able to update the state values after each state by using the reward and state values in the next state. In order to do this, we change the update rule as follows;
+V(S_t) = V(S_t) + alfa(R_t+1 + gamma V(S_t+1) - V(S_t))
+So we add immediate reward and discounted value of next.
+Alfa should be a small number because we want to mostly rely on previous estimate but we want to benefit from TD target as well.
+
+TD Prediction - Action Values:
+Similar to state value update rule, action value update rule is as follows;
+Q(S_t, A_t) = Q(S_t, A_t) + alfa(R_1 + gamma Q(S_t+1, A_t+1) - Q(S_t, A_t))
+
+TD Control - Sarsa(0):
+After each action, we'll use the action values and epsilon-greedy algorithm to update the policy. 
+policy = epsilon_greedy(Q)
+We'll set the epsilion value to a small number. So, the policy changes very slowly after each action.
+This algorithm is called Sarsa(0).
+Sarsa uses the action value update function above (in TD Prediction - Action Values part)
+
+TD Control - Sarsamax:
+Sarsamax is also known as q-learning control algorithm and action value update rule is as follows;
+Q(S_t, A_t) = Q(S_t, A_t) + alfa(R_1 + gamma max( Q(S_t+1, a)) - Q(S_t, A_t)) 
+a is an element of A. So, we take the maximum Q for all actions.
+Sarsa uses currently followed action value, since it takes A_t+1.
+Sarsamax directly attempts to approximate the optimal value function at every time step.
+Similar to Sarsa, action value calculation is followed by epsilon-greedy.
+
+TD Control - Expected Sarsa:
+Expected Sarsa is slightly different from Sarsamax, it uses the expected value of the next state action pair, where the expectation takes into account the probability that the agent selects each possible action from the next state. The equation goes as follows;
+Q(S_t, A_t) = Q(S_t, A_t) + alfa(R_1 + gamma sum(policy(a | S_t+1)  Q(S_t+1, a)) - Q(S_t, A_t)) 
+sum is applied for each action a in action set A.
+
+Analyzing Performance:
+Sarsa and Expected Sarsa are on-policy TD control algorithms. In this case, the same epsilon-greedy policy that is evaluated and improved is also used to select actions.
+Sarsamax is an off-policy method, where the (greedy) policy that is evaluated and improved is different from the epsilon-greedy policy that is used to select actions.
+On-policy TD control methods (like Expected Sarsa and Sarsa) have better online performance than off-policy TD control methods (like Sarsamax).
+Expected Sarsa generally achieves better performance than Sarsa.
