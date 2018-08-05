@@ -112,3 +112,9 @@ Deep Q-Learning Algorithm:
 
 Step 8 is for SAMPLE, and Step 9 is for LEARN.
 phi is a function for pre-processing (changing the frame to grey scale, chaning size, etc.) and stacking (stacking images for the third dimesion (e.g 4 images are stacked)).
+
+DQN Improvements:
+Some of the improvement suggestions are Double DQNs, Prioritized Replay, Dueling Networks.
+Double DQNs -> Since we get max_A(est_q(prime_S, A, w)), in early stages of learning w values may be misleading and it may reflect long term values. In order to solve it we introduce prime_w to evaluate actions. We can use minus_w as prime_w.
+Prioritized Replay -> We have replay memory D and if we fill D uniformly, we'll miss to reply infrequent experiences. In order to solve this problem we use prioritized replay and prioritize some experiences. Experiences with larger errors will have more priority. We'll control prioritized replay vs uniform sampling with a variable a. Because, we don't want other experiences to starve.
+Dueling Networks -> The main idea is to use two streams, one that estimates state value function and the other one estimates advantage values. The branches created at the last fully connected layer. We add a last layer to combine values called q-values.

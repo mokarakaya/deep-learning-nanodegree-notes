@@ -1,0 +1,4 @@
+Policy-Based Methods:
+So far, we have worked on value-based methods where we optimize value function and policies are implicitly optimized.
+In this lesson, we'll try to optimize policies directly without using value functions.
+In next lesson, we'll combine these two methods which is known as actor-critic methods.
