@@ -1,0 +1,65 @@
+Deep Reinforcement Learning:
+Reinformancement Learning problems are typically;
+- Markov Decision Process(MDP) -> (S, A, P, R, gamma) (P is probability and gamma is the discount factor. gamma is lower for futurerewards.)
+- State transition and reward model -> P(S_t+1, R_t+1 | S_t, A_t) (S_t+1, R_t+1 only depend on S_t, A_t) 
+- State Value Function -> V(S) (We generally predict these values)
+- Action Value Function -> Q(S, A) (Helps to find best action to take)
+- Goal -> Find optimal policy pi* that maximize total expected reward.
+
+Deep reinforcement learning approaches use deep learning algorithms (e.g. neural networks) to solve reinforcement learning problems.
+
+Discrete vs Continuous Spaces:
+If number of states and actions are finite, we call it as discrete space.
+If states or actions (or both) are real numbers, we need to use continuous spaces.
+In continuous spaces states are not integers but real numbers (e.g numbers between 0.0 and 1.0)
+For instance, vacuum cleaners divides the world in to grid models. If it uses grid based models for states, it means we use discrete spaces. But in reality it may go 1.73 cm right instead of 2 grid right. In order to set action as 1.73 cm right, we need to use continuous spaces.
+
+Discretization:
+Discretization is converting a continuous space into a discrete one.
+So, that we can use existing grid based reinforcement learning algorithms without changing them(or small changes).
+
+Tile Coding:
+We overlay multiple grids or tilings op top of the continuous space. A space overlaps with new grids created by tilings and spaces activates the tilings. 
+Adaptive Tile Coding -> Starts with the default grids and divides the grids whenever it's needed by using heuristics.
+
+Coarse Coding:
+Coarse coding is similar to tile coding but it uses a sparser set of features to encode the state space. It adds circles as tiles to the space and larger circles generally leads to smoother state values.
+
+Function approximation: 
+When the underlying space is complicated, the number of dicrete states needed can become very large.
+Moreover, state values of the states nearby to a particular state should change smoothly. Discretization doesn't always exploit this characteristic. 
+So we introduce a parameter vector W that shapes the function ->
+v(s,W) 
+q(s, a, W)
+
+We can update the W values until we reach to a smooth representation.
+If we use v(s, W) instead of v(s), we can get the dot product of s and W to get a scalar value.
+
+Linear Function approximation:
+Iterative update rule for w;
+w = alfa(v_pi(s), - dot(x(s), w) ) x(s) 
+alfa is the learning rate. x(s) is feature vector.
+
+Kernel Functions:
+Kernel function is an extension of linear function approximation and it's used to capture non-linear relationships.
+We use feature transformation to do it as follows;
+A normal feature vector is -> x(s) = x_1(s), x_2(s), ..., x_n(s)
+we transform it to kernel functions as x_1(s) = s, x_2(s) = power(s, 2), x_3(s) = power(s, 3), ..., x_n(s) = power(s, n)
+
+Non-linear function approximation:
+We apply non-linear function f to linear dot(x(s), w). f is actually an activation function which we already know from neural networks.
+
+v(s, W) = f( dot(x(s), w) )
+x(s) = x_1(s), x_2(s), ..., x_n(s)
+
+Gradient descent update rule for derW (der is derivative) is;
+derW = alfa (v_pi(s) - v_est(s, W)) derW v_est(s, W)
+v_est is v estimated.
+
+Summary:
+In order to extend learning algorithms to continuous spaces, we can discretize the state space or directly approximate desired value functions. 
+For discretization, we can use direct grids, tile coding or coarse coding.
+For direct approximation,  we can use linear approximation or non-linear approximation.
+
+
+

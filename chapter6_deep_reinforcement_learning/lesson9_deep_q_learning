@@ -1,0 +1,114 @@
+Intro to Deep Q-Learning:
+Deep Q-Learning uses neural networks to solve reinforcement learning problems.
+First, we'll see how to represent neural networks as value functions. Then, we'll apply q-learning to monte carlo and temporal-difference learning. Then we'll implement a deep q-learning algorithm. Finally, we'll apply q-learning to CNN and RNN. It's almost impossible to learn how to play video games with CNN and RNN, but q-learning helps to solve it.
+
+Neural Nets as Value Functions:
+We will use derivate W (state value function)  which we learnt in previous lesson and calculate the loss function;
+derW = alfa (v_pi(s) - v_est(s, W)) derW v_est(s, W)
+Loss function -> power(v_pi(s) - v_est(s, W), 2)
+We backpropagate x(s)
+
+Similarly action value function is;
+derW = alfa (q_pi(s, a) - q_est(s, a, W)) derW q_est(s, a, W)
+
+Monte Carlo Learning:
+The classical formula to update the value functions was;
+V(S_t) = V(S_t) + alfa(G_t - V(S_t))
+where G_t is cumulative discounted reward ->  R_t+1 + gamma R_t+2 + power(gamma, 2) R_t+3 + ...
+
+So, can replace V_pi(S_t) (which is unknown) with G_t and create a concrete update rule for state value functions represented by neural networks or other function approximators as follows;
+derW = alfa (G_t - v_est(s, W)) derW v_est(s, W)
+We can apply the same for action value functions as follows;
+derW = alfa (G_t - q_est(s, a, W)) derW q_est(s, a, W)
+
+The full algorithm for Monte Carlo with Function Approximation will be as follows;
+
+1 Initialize W with random values
+2 Initialize policy pi -> epsilion-greedy(est_q(s, a, w))
+3 Repeat till converge ->
+    4.1 Generate an episode S_0, A_0, R_1, ..., S_T using pi
+    4.2 for t <- 1 to T
+            4.3 derW = alfa (G_t - q_est(s, a, W)) derW q_est(s, a, W)
+            5 pi <- epsilion-greedy(est_q(s, a, w))
+
+Step 4 is evaluation and step 5 is improvement.
+
+Temporal Difference Learning:
+The classical formula to update the value functions was;
+V(S_t) = V(S_t) + alfa(R_t+1 + gamma V(S_t+1) - V(S_t))
+We use TD target and update the derW formula as follows;
+derW = alfa (R_t+1 + gamma est_V(S_t+1, W)- v_est(s, W)) derW v_est(s, W)
+We can apply the same for action value functions as follows;
+derW = alfa (R_t+1 + gamma q_est(S_t+1, A_t+1, W) - q_est(S_t, A_t, W)) derW q_est(S_t, A_t, W)
+
+We can update the SARSA algorithm as follows;
+Initialize w randomly, pi <- epsilion-greedy(est_q(s, a, w))
+repeat for many episodes
+    Initial state S
+    while S is non-terminal
+        Choose action A from state S using policy pi
+        Take action A, observe R, prime_S
+        Choose action prime_A from state prime_S using policy pi
+        Update derW = alfa(R + gamma est_q(prime_S, prime_A, w) - est_q(S, A, w)) derw est_q(S, A, w)
+        S <- prime_S
+        A <- prime_A
+
+Q-Learning:
+Q-Learning algorithm for episodic tasks is similar to temporal difference learning except the update rule and it's as follows;
+Initialize w randomly, pi <- epsilion-greedy(est_q(s, a, w))
+repeat for many episodes
+    Initial state S
+    while S is non-terminal
+        Choose action A from state S using policy pi
+        Take action A, observe R, prime_S
+        Choose action prime_A from state prime_S using policy pi
+        Update derW = alfa(R + gamma( max_A(est_q(prime_S, A, w)) - est_q(S, A, w)) derw est_q(S, A, w)
+        S <- prime_S
+We can remove the parts related to the episodic task and add a termination criteria, then we'll have an algorithm for continuing tasks.
+
+Comparison of SARSA and Q-Learning -> 
+Sarsa is on-policy, has good online performance but Q-values are affected by exploration.
+Q-Learning is off-policy, has bad online performance and Q-values are not affected by exploration.
+
+The off-policy algorithms has an advantage that they decouple the actions from it's learning process. That gives us the oppurtunityto build different variations of our learning algorithm.
+So off-policy gives advantages such as;
+- More exploration when learning
+- Learning from demostration
+- Supports offline or batch learning
+
+Deep Q Network:
+In 2015, Deep Mind designed an agent which plays video games as follows;
+- Convert the frame to grey scale, and a square 84 X 84
+- The final state space size 84 X 84 X 4 (last 4 images sequentially)
+There are some training techniques for Q-Learning algorithms such as Experience Replay, Fixed Q Targets etc.
+
+Experience Replay:
+In basic online Q-learning algorithm, the agent interacts with the environment and in each time step we obtain a (S_t, A_t, R_t+1, S_t+1) tuple. We learn from this tuple and discard it.
+We can store rare experiences in a buffer. We can sample a small set of tuples and re-learn from it. Since we save S_t and S_t+1, sequence of tuples is not important.
+
+Fixed Q Targets:
+We fix the w value which we pass to the TD Target during a certain number of learning steps;
+Update derW = alfa(R + gamma( max_A(est_q(prime_S, A, minus_w)) - est_q(S, A, w)) derw est_q(S, A, w)
+minus_w means w is fixed and it's not affected from the changes during a certain number of learning steps.
+This change decouples the target from the parameters, makes the learning algorithm much more stable, and less likely to diverge or fall into oscillations.
+
+Deep Q-Learning Algorithm:
+1 Initialize replay memory D with capacity N
+2 Initialize action-value function est_q with random weights w
+3 Initialize target action-value weights minus_w <- w
+4 for the episode e <- 1 to M
+    5 Initial input frame x_1
+    6 Prepare initial state S <- phi(x_1)
+    7 for time step t <- 1 to T
+        8.1 Choose action A from state S using policy p <- epsilon-greedy(est_q(S, A, w))
+        8.2 Take action A, observe reward R, and next input frame x_t+1
+        8.3 Prepare next state prime_S <- phi(x_t-2, x_t-1, x_t, x_t+1)
+        8.4 Store experience tuple (S, A, R, prime_S) in replay memory D
+        8.5 S <- prime_S
+        9.1 Obtain random minibatch of tuples (s_j, a_j, r_j, s_j+1) from D
+        9.2 Set target y_j = r_j + gamma max_a( est_q(s_j+1, a, minus_w))
+        9.3 Update derW = alfa(y_j - est_q(s_j, a_j, w)) derW est_q(s_j, a_j, w)
+        9.4 Every C steps, reset minus_w <- w 
+
+Step 8 is for SAMPLE, and Step 9 is for LEARN.
+phi is a function for pre-processing (changing the frame to grey scale, chaning size, etc.) and stacking (stacking images for the third dimesion (e.g 4 images are stacked)).
