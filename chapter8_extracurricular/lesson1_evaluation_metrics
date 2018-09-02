@@ -1,0 +1,23 @@
+Confusion Matrix:
+The patient is sick and diagnosed as sick -> True positive
+The patient is sick and diagnosed as healthy -> False negative
+The patient is healthy and diagnosed as sick -> False positive
+The patient is healthy and diagnosed as healthy -> True negatives
+
+Precision:
+Precision -> true positives / (true positives + false positives)
+
+Recall:
+Recall -> true positives / (true positives + false negatives)
+
+ROC Curve:
+We first calculate True Positive Rate and False Positive Rate pairs from different predictions.
+True Positive Rate = True Positives / All Positives
+False Positive Rate = False Positives / All Negatives
+
+After we found all pairs (or enough), we plot them into x,y graph and calculate the area of the curve.
+Area under the curve for Perfect Split is a square.
+Area under the curve for Random Split is close to a triangle.
+Area under the curve for Good Split is a curve.
+
+
